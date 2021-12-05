@@ -55,7 +55,6 @@ void airodump(pcap_t *handle,char* dev)
 
     while(chk)
     {
-        puts("hi");
         int res = pcap_next_ex(handle,&header,&packet);
         if(res == 0) continue;
         
