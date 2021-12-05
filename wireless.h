@@ -55,8 +55,10 @@ void airodump(pcap_t *handle,char* dev)
 
     while(chk)
     {
+        puts("hi");
         int res = pcap_next_ex(handle,&header,&packet);
         if(res == 0) continue;
+        
         if(res == -1 || res == -2)
         {
             printf("pcap_next_ex return %d(%s)\n", res, pcap_geterr(handle));
@@ -65,7 +67,9 @@ void airodump(pcap_t *handle,char* dev)
         PRTHDR radiotap = (PRTHDR)packet;
         uint16_t radio_len = radiotap->hdr_len;
         PBF beacon = (PBF)(packet+radio_len);
+
         if(beacon->subtype != BEACON) continue;
+        
         Mac bssid = beacon->bssid;
         PFMF fixed_man = (PFMF)(((u_char*)beacon)+sizeof(BF));
         char* tagged = ((char*)fixed_man)+sizeof(FMF);

@@ -18,9 +18,10 @@ typedef RTHDR* PRTHDR;
 #pragma pack(push,1)
 typedef struct beacon_frame
 {
-    uint8_t subtype:4;
-    uint8_t type:2;
     uint8_t version:2;
+    uint8_t type:2;
+    uint8_t subtype:4;
+    uint8_t flags;
     uint16_t duration;
     Mac dst;
     Mac src;
